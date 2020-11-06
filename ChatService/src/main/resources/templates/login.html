@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>群聊系统登录页面</title>
+	<!-- Bootstrap core CSS -->
+	<link th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link th:href="@{/asserts/css/signin.css}" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" th:action="@{/user/login}" method="post">
+	<img class="mb-4" th:src="@{/asserts/img/chat.png}" src="asserts/img/chat.png" alt="" width="72" height="72">
+	<h1 class="h3 mb-3 font-weight-normal">请登陆</h1>
+	<!--判断-->
+	<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+	<label class="sr-only" >用户名</label>
+	<input id="acc" type="text"  name="username" class="form-control" placeholder="账号" required="" autofocus="" >
+	<label  class="sr-only" >密码</label>
+	<input id="pwd" type="password" name="password" class="form-control" placeholder="密码" required="">
+	<div class="checkbox mb-3">
+		<label>
+			<input id="select" name="select" type="checkbox" checked value="remember"/> 记住我
+		</label>
+	</div>
+	<button class="btn btn-lg btn-primary btn-block" type="submit" >登陆</button>
+	<p class="mt-5 mb-3 text-muted">© 2020-2021</p>
+</form>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
+<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/webjars/popper.js/1.11.1/dist/popper.js}"></script>
+<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.js}"></script>
+
+<!-- Icons -->
+<script type="text/javascript" src="asserts/js/feather.min.js" th:src="@{/asserts/js/feather.min.js}"></script>
+<script>
+	feather.replace()
+</script>
+<script>
+	//读取cookies
+	var acc="";
+	var pwd="";
+	window.onload =	function(){
+
+		var allcookies = document.cookie;
+		var cookie_pos = allcookies.indexOf("Chatlogin");
+		// 如果找到了索引，就代表cookie存在,否则不存在
+
+		if (cookie_pos != -1) {
+			// 把cookie_pos放在值的开始，只要给值加1即可
+			//计算取cookie值得开始索引，加的1为“=”
+			cookie_pos = cookie_pos + "Chatlogin".length + 1;
+			//计算取cookie值得结束索引
+			var cookie_end = allcookies.indexOf(";", cookie_pos);
+			if (cookie_end == -1) {
+				cookie_end = allcookies.length;
+			}
+			//得到想要的cookie的值
+			var value = unescape(allcookies.substring(cookie_pos, cookie_end));
+			var arr=""
+			if (value!="") {
+				arr=value.split("#");
+				acc=arr[0];
+				pwd=arr[1];
+			}
+			// 将得到的值赋值给账号密码
+			document.getElementById('acc').value = acc;
+			document.getElementById('pwd').value = pwd;
+		}
+		if (acc==""){
+			// 根据是否存在账号来判断是否保存
+			document.getElementById('select').removeAttribute("checked")
+		}
+	}
+</script>
+</body>
+</html>

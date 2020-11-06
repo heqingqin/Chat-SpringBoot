@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Config" removed="false">
+          <file>file://$MODULE_DIR$/ChatClient/src/spring-config.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Spring Config (2)" removed="false">
+          <file>file://$MODULE_DIR$/ChatService/src/spring-config.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>
